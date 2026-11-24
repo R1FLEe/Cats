@@ -1,0 +1,22 @@
+﻿=====================================================================
+ 1) СТАРТОВОЕ СООБЩЕНИЕ ДЛЯ OPENCODE
+    Заполни места с ____ , скопируй всё между линиями и вставь в opencode.
+=====================================================================
+Инцидент: на этом ПК (Windows) пропал интернет по кабелю. Схема: ПК -> кабель -> домашний роутер -> провайдер. Телефон по Wi-Fi от этого же роутера работает, мастер провайдера проверил линию и роутер - всё в порядке, проблема в ПК.
+Сессия с ИИ-агентом, после которой всё сломалось, была: ____ (дата). Агент ставил/обновлял пакеты, возможно драйверы, и что-то делал с VPN / прокси / обходом блокировок. На следующий день интернета не стало.
+Что вижу сам: значок сети в трее - ____ ; браузер пишет - ____ .
+USB-модем с телефона: работает / не работает / не пробовал (оставь нужное). Сейчас он ОТКЛЮЧЁН.
+Что нашёл во вчерашней сессии opencode (/sessions), если смотрел: ____
+Отчёты уже собраны: C:\netfix\out\report.txt и C:\netfix\out\changes.txt (если их нет - запусти diag.ps1 сам, как написано в AGENTS.md).
+Действуй строго по C:\netfix\AGENTS.md (если его нет в контексте - прочитай файл). Начни с фазы 1: только диагностика, ничего не меняй без моего "ОК". Пиши мне по-русски.
+=====================================================================
+
+
+=====================================================================
+ 2) ЗАПАСНОЙ КОРОТКИЙ ПРОМТ
+    Только если файлы на ПК перенести не получилось и текст набираешь руками.
+=====================================================================
+You are a senior Windows network engineer. Wired internet on this PC died (PC -> cable -> home router; phone on the same router works, ISP checked the line). It broke the day after an AI agent installed packages/drivers and VPN/proxy/DPI-bypass tools. PC is offline. Use PowerShell. Reply in Russian.
+Rules: read-only diagnostics first. Change nothing until you show cause + evidence + fix + rollback and I say OK. Back up before each change, one change at a time, retest after each. Keep outputs short. Notes in C:\netfix\NOTES.md.
+Check bottom-up and quote evidence: Get-NetAdapter; Get-NetIPConfiguration; ping router, 8.8.8.8, 77.88.8.8; Resolve-DnsName ya.ru; curl.exe -I https://ya.ru and curl.exe --noproxy * -I https://ya.ru; system proxy (HKCU Internet Settings ProxyEnable/ProxyServer/AutoConfigURL), netsh winhttp show proxy, HTTP(S)_PROXY env vars; default routes and VPN/TUN adapters; services/processes/drivers: zapret, winws, goodbyedpi, windivert, v2ray, xray, sing-box, clash, hiddify, warp, wintun; firewall outbound block rules; hosts; DNS servers; netsh winsock show catalog; System event 7045 since the incident day.
+=====================================================================
